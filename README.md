@@ -48,38 +48,6 @@ A fast, offline-capable reference tool for IT support scenarios. Each article in
 
 ---
 
-## How to Add an Article
-
-Find the `ARTICLES` array in the `<script>` section of `index.html` and add a new entry following this structure:
-
-```javascript
-{
-  id: 36,                          // Unique ID
-  cat: 'windows',                  // Category key (see list below)
-  severity: 'medium',              // 'high' | 'medium' | 'low'
-  title: 'Outlook calendar not syncing',
-  desc: 'One-line description shown on the card.',
-  tags: ['Outlook', 'Calendar', 'Exchange'],
-  keywords: 'calendar not syncing outlook appointments missing',  // Extra search terms
-  symptoms: 'What the user reports and what you observe.',
-  cause: 'Why this happens.',
-  fix: 'High-level resolution approach.',
-  escalate: 'When and who to escalate to (optional).',
-  steps: [
-    {
-      text: 'Description of what to do.',
-      note: 'Optional tip or warning shown in italic.',   // optional
-      code: 'Get-MailboxCalendarConfiguration -Identity user@company.com',
-      lang: 'powershell'   // 'cmd' | 'powershell' | 'bash' | 'ios' | 'portal'
-    },
-    {
-      text: 'A prose-only step with no command.',
-      text_only: true
-    }
-  ],
-  related: [10, 11]   // IDs of related articles
-}
-```
 
 **Available category keys:**
 
@@ -106,18 +74,6 @@ Find the `ARTICLES` array in the `<script>` section of `index.html` and add a ne
 
 ---
 
-## Deployment
-
-This repo is deployed via GitHub Pages from the `main` branch root. Any commit to `main` automatically updates the live site within ~60 seconds.
-
-To deploy your own fork:
-1. Fork this repo
-2. Go to **Settings → Pages → Source → Deploy from branch → main / root**
-3. Access at `https://[your-username].github.io/Basic-IT-TroubleshootingKB/`
-
-> **Note:** The copy-to-clipboard feature requires HTTPS and will not work when opening `index.html` directly from the filesystem (`file://`). It works correctly on GitHub Pages.
-
----
 
 ## Author
 
