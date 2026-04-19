@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,106 +7,173 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0b0e13;--bg2:#111620;--bg3:#161c28;--border:#1e2a3a;--border2:#243040;--green:#00e676;--green-dim:#00b85a;--green-glow:rgba(0,230,118,0.12);--amber:#ffb300;--amber-dim:rgba(255,179,0,0.12);--red:#ff5252;--red-dim:rgba(255,82,82,0.1);--blue:#42a5f5;--blue-dim:rgba(66,165,245,0.1);--text:#c9d4e3;--text2:#7a8fa8;--text3:#4a5a6e;--mono:'JetBrains Mono',monospace;--sans:'DM Sans',sans-serif;--radius:6px}
+/* ── THEME VARS ─────────────────────────────────────────── */
+[data-theme="dark"]{
+  --bg:#0b0e13;--bg2:#111620;--bg3:#161c28;
+  --border:#1e2a3a;--border2:#243040;
+  --green:#00e676;--green-dim:#00b85a;--green-glow:rgba(0,230,118,0.12);
+  --amber:#ffb300;--amber-dim:rgba(255,179,0,0.12);
+  --red:#ff5252;--red-dim:rgba(255,82,82,0.1);
+  --blue:#42a5f5;--blue-dim:rgba(66,165,245,0.1);
+  --text:#c9d4e3;--text2:#7a8fa8;--text3:#4a5a6e;
+  --shadow:rgba(0,0,0,0.4);
+}
+[data-theme="light"]{
+  --bg:#f0f2f5;--bg2:#ffffff;--bg3:#f5f7fa;
+  --border:#d0d7e2;--border2:#b8c2d4;
+  --green:#00875a;--green-dim:#00a36c;--green-glow:rgba(0,135,90,0.1);
+  --amber:#b45309;--amber-dim:rgba(180,83,9,0.1);
+  --red:#c0392b;--red-dim:rgba(192,57,43,0.08);
+  --blue:#1a56db;--blue-dim:rgba(26,86,219,0.08);
+  --text:#1a1f2e;--text2:#4a5568;--text3:#8492a6;
+  --shadow:rgba(0,0,0,0.1);
+}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:15px}
-body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
-.topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 1.5rem;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-.topbar-brand{font-family:var(--mono);font-size:13px;display:flex;align-items:center;gap:10px}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;transition:background .2s,color .2s}
+
+/* ── TOPBAR ─────────────────────────────────────────────── */
+.topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 1.5rem;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;transition:background .2s}
+.topbar-brand{font-family:'JetBrains Mono',monospace;font-size:13px;display:flex;align-items:center;gap:10px}
 .prompt{color:var(--green)}
 .cursor{display:inline-block;width:8px;height:15px;background:var(--green);animation:blink 1.1s step-end infinite;vertical-align:middle;margin-left:2px}
 @keyframes blink{50%{opacity:0}}
-.topbar-right{display:flex;align-items:center;gap:12px}
+.topbar-right{display:flex;align-items:center;gap:10px}
 .search-wrap{position:relative;display:flex;align-items:center}
 .search-icon{position:absolute;left:10px;width:14px;height:14px;color:var(--text3);pointer-events:none}
-#searchInput{font-family:var(--mono);font-size:12px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);padding:7px 12px 7px 32px;width:300px;outline:none;transition:border-color .2s,box-shadow .2s}
+#searchInput{font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--text);padding:7px 12px 7px 32px;width:300px;outline:none;transition:border-color .2s,box-shadow .2s}
 #searchInput::placeholder{color:var(--text3)}
 #searchInput:focus{border-color:var(--green-dim);box-shadow:0 0 0 3px var(--green-glow)}
-.stat-pill{font-family:var(--mono);font-size:11px;background:var(--bg3);border:1px solid var(--border);border-radius:20px;padding:4px 12px;color:var(--text2);white-space:nowrap}
+.icon-btn{background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--text2);width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;font-size:15px;flex-shrink:0}
+.icon-btn:hover{color:var(--text);border-color:var(--border2)}
+.stat-pill{font-family:'JetBrains Mono',monospace;font-size:11px;background:var(--bg3);border:1px solid var(--border);border-radius:20px;padding:4px 12px;color:var(--text2);white-space:nowrap}
 .stat-pill span{color:var(--green)}
+
+/* ── LAYOUT ─────────────────────────────────────────────── */
 .shell{display:flex;flex:1;overflow:hidden}
-.sidebar{width:230px;min-width:230px;background:var(--bg2);border-right:1px solid var(--border);padding:1.25rem 0;overflow-y:auto;position:sticky;top:56px;height:calc(100vh - 56px)}
-.sidebar-section-label{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);padding:0 1.25rem .5rem;margin-top:1rem}
+.sidebar{width:235px;min-width:235px;background:var(--bg2);border-right:1px solid var(--border);padding:1.25rem 0;overflow-y:auto;position:sticky;top:56px;height:calc(100vh - 56px);transition:background .2s}
+.sidebar-section-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);padding:0 1.25rem .5rem;margin-top:1rem}
 .sidebar-section-label:first-child{margin-top:0}
-.cat-btn{display:flex;align-items:center;gap:10px;width:100%;padding:7px 1.25rem;font-family:var(--sans);font-size:13px;color:var(--text2);background:none;border:none;border-left:2px solid transparent;cursor:pointer;text-align:left;transition:background .15s,color .15s}
+.cat-btn{display:flex;align-items:center;gap:10px;width:100%;padding:7px 1.25rem;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text2);background:none;border:none;border-left:2px solid transparent;cursor:pointer;text-align:left;transition:background .15s,color .15s}
 .cat-btn:hover{background:var(--bg3);color:var(--text)}
 .cat-btn.active{color:var(--green);background:var(--green-glow);border-left-color:var(--green)}
 .cat-icon{width:16px;text-align:center;font-size:13px;flex-shrink:0}
-.cat-count{margin-left:auto;font-family:var(--mono);font-size:10px;background:var(--bg3);color:var(--text3);padding:2px 6px;border-radius:10px;border:1px solid var(--border)}
+.cat-count{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:10px;background:var(--bg3);color:var(--text3);padding:2px 6px;border-radius:10px;border:1px solid var(--border)}
 .cat-btn.active .cat-count{background:var(--green-glow);color:var(--green-dim);border-color:var(--green-dim)}
 .sidebar-divider{height:1px;background:var(--border);margin:.75rem 0}
 .sev-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .dot-high{background:var(--red)}.dot-med{background:var(--amber)}.dot-low{background:var(--green)}
+
+/* ── MAIN ───────────────────────────────────────────────── */
 .main{flex:1;overflow-y:auto;padding:1.75rem 2rem}
 .view-header{margin-bottom:1.25rem;display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px}
-.view-title{font-family:var(--mono);font-size:20px;color:var(--text);font-weight:400}
+.view-title{font-family:'JetBrains Mono',monospace;font-size:20px;color:var(--text);font-weight:400}
 .view-title .accent{color:var(--green)}
-.view-meta{font-family:var(--mono);font-size:11px;color:var(--text3)}
+.view-meta{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text3)}
 .active-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1rem}
-.filter-badge{font-family:var(--mono);font-size:11px;padding:3px 10px;border-radius:20px;border:1px solid var(--green-dim);color:var(--green);background:var(--green-glow);display:flex;align-items:center;gap:6px;cursor:pointer}
+.filter-badge{font-family:'JetBrains Mono',monospace;font-size:11px;padding:3px 10px;border-radius:20px;border:1px solid var(--green-dim);color:var(--green);background:var(--green-glow);display:flex;align-items:center;gap:6px;cursor:pointer}
 .filter-badge .x{opacity:.6}
 .filter-badge:hover .x{opacity:1}
+
+/* ── CARDS ──────────────────────────────────────────────── */
 .articles-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:1rem}
-.article-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.2rem;cursor:pointer;transition:border-color .2s,background .2s,transform .15s;position:relative;overflow:hidden}
+.article-card{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:1rem 1.2rem;cursor:pointer;transition:border-color .2s,background .2s,transform .15s;position:relative;overflow:hidden}
 .article-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--green);opacity:0;transition:opacity .2s}
 .article-card:hover{border-color:var(--border2);background:var(--bg3);transform:translateY(-1px)}
 .article-card:hover::before{opacity:1}
 .card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:.5rem}
-.card-severity{font-family:var(--mono);font-size:10px;padding:3px 8px;border-radius:3px;letter-spacing:.06em;text-transform:uppercase;font-weight:500}
+.card-right{display:flex;align-items:center;gap:6px}
+.fav-btn{background:none;border:none;cursor:pointer;font-size:14px;line-height:1;padding:2px;opacity:.4;transition:opacity .2s,transform .15s}
+.fav-btn:hover{opacity:.8}
+.fav-btn.active{opacity:1;transform:scale(1.1)}
+.card-severity{font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 8px;border-radius:3px;letter-spacing:.06em;text-transform:uppercase;font-weight:500}
 .sev-high{background:var(--red-dim);color:var(--red);border:1px solid rgba(255,82,82,.25)}
 .sev-med{background:var(--amber-dim);color:var(--amber);border:1px solid rgba(255,179,0,.25)}
 .sev-low{background:var(--green-glow);color:var(--green);border:1px solid rgba(0,230,118,.25)}
-.sev-info{background:var(--blue-dim);color:var(--blue);border:1px solid rgba(66,165,245,.25)}
-.card-title{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--text);margin-bottom:.45rem;line-height:1.4}
+.card-title{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--text);margin-bottom:.45rem;line-height:1.4}
 .card-desc{font-size:12.5px;color:var(--text2);line-height:1.6;margin-bottom:.75rem}
 .card-footer{display:flex;align-items:center;justify-content:space-between}
 .card-tags{display:flex;gap:5px;flex-wrap:wrap}
-.tag{font-family:var(--mono);font-size:10px;color:var(--text3);background:var(--bg);border:1px solid var(--border);padding:2px 6px;border-radius:3px}
-.card-steps-count{font-family:var(--mono);font-size:11px;color:var(--text3);white-space:nowrap;margin-left:8px}
+.tag{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);background:var(--bg);border:1px solid var(--border);padding:2px 6px;border-radius:3px}
+.card-steps-count{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text3);white-space:nowrap;margin-left:8px}
 .no-results{text-align:center;padding:4rem 2rem;display:none}
 .no-results.visible{display:block}
-.no-results pre{font-family:var(--mono);font-size:13px;color:var(--green);margin-bottom:1rem;opacity:.6}
+.no-results pre{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--green);margin-bottom:1rem;opacity:.6}
 .no-results p{color:var(--text2);font-size:13px}
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(5,8,14,.88);z-index:200;overflow-y:auto;padding:2rem 1rem}
+
+/* ── MODAL ──────────────────────────────────────────────── */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(5,8,14,.85);z-index:200;overflow-y:auto;padding:2rem 1rem}
+[data-theme="light"] .modal-overlay{background:rgba(0,0,0,.5)}
 .modal-overlay.open{display:flex;justify-content:center;align-items:flex-start}
 .modal{background:var(--bg2);border:1px solid var(--border2);border-radius:8px;width:100%;max-width:740px;animation:slideUp .2s ease}
 @keyframes slideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 .modal-header{padding:1.4rem 1.5rem 1rem;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:1rem}
 .modal-title-wrap{flex:1}
-.modal-breadcrumb{font-family:var(--mono);font-size:11px;color:var(--text3);margin-bottom:6px}
+.modal-breadcrumb{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text3);margin-bottom:6px}
 .modal-breadcrumb span{color:var(--green)}
-.modal-title{font-family:var(--mono);font-size:16px;font-weight:500;color:var(--text);line-height:1.35;margin-bottom:8px}
+.modal-title{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:500;color:var(--text);line-height:1.35;margin-bottom:8px}
 .modal-meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.modal-close{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);color:var(--text2);font-size:18px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:all .15s}
+.modal-actions{display:flex;gap:8px;flex-shrink:0;align-items:flex-start}
+.modal-close{background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--text2);font-size:16px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s}
 .modal-close:hover{color:var(--text);border-color:var(--border2)}
+.modal-print-btn{background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--text2);font-size:11px;font-family:'JetBrains Mono',monospace;padding:0 10px;height:32px;display:flex;align-items:center;gap:5px;cursor:pointer;white-space:nowrap;transition:all .15s}
+.modal-print-btn:hover{color:var(--green);border-color:var(--green-dim)}
+.modal-fav-btn{background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--text2);font-size:14px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s}
+.modal-fav-btn.active{color:#f59e0b;border-color:#f59e0b}
+.modal-fav-btn:hover{border-color:var(--border2)}
 .modal-body{padding:1.5rem}
-.modal-section-label{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:.9rem;display:flex;align-items:center;gap:8px}
+.modal-section-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:.9rem;display:flex;align-items:center;gap:8px}
 .modal-section-label::after{content:'';flex:1;height:1px;background:var(--border)}
-.symptom-box{background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--amber);border-radius:var(--radius);padding:.9rem 1rem;font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:1.25rem}
+.symptom-box{background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--amber);border-radius:6px;padding:.9rem 1rem;font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:1.25rem}
 .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.5rem}
 @media(max-width:600px){.info-grid{grid-template-columns:1fr}}
-.info-box{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:.9rem}
-.info-box-label{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:.4rem}
+.info-box{background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:.9rem}
+.info-box-label{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:.4rem}
 .info-box-val{font-size:13px;color:var(--text2);line-height:1.6}
 .steps{list-style:none;margin-bottom:1.5rem}
 .step{display:flex;gap:1rem;margin-bottom:1rem;align-items:flex-start}
-.step-num{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--bg2);background:var(--green);border-radius:3px;width:22px;height:22px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.step-num{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--bg2);background:var(--green);border-radius:3px;width:22px;height:22px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
 .step-content{flex:1}
 .step-text{font-size:13.5px;color:var(--text);line-height:1.65;margin-bottom:5px}
 .step-note{font-size:12px;color:var(--text3);line-height:1.5;font-style:italic;margin-top:4px}
-.code-block{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);margin:.5rem 0 0;overflow:hidden}
+.code-block{background:var(--bg);border:1px solid var(--border);border-radius:6px;margin:.5rem 0 0;overflow:hidden}
+[data-theme="light"] .code-block{background:#1e2433}
+[data-theme="light"] code{color:#7dd3a8}
 .code-header{display:flex;align-items:center;justify-content:space-between;padding:5px 12px;border-bottom:1px solid var(--border);background:var(--bg3)}
-.code-lang{font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:.06em;text-transform:uppercase}
-.copy-btn{font-family:var(--mono);font-size:11px;background:none;border:1px solid var(--border2);border-radius:4px;color:var(--text2);padding:3px 10px;cursor:pointer;transition:all .15s}
-.copy-btn:hover{color:var(--green);border-color:var(--green-dim)}
-.copy-btn.copied{color:var(--green);border-color:var(--green)}
-code{display:block;font-family:var(--mono);font-size:12px;color:var(--green);padding:11px 14px;overflow-x:auto;white-space:pre;line-height:1.6}
+[data-theme="light"] .code-header{background:#252e42;border-color:#334}
+.code-lang{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:.06em;text-transform:uppercase}
+[data-theme="light"] .code-lang{color:#8899aa}
+.copy-btn{font-family:'JetBrains Mono',monospace;font-size:11px;background:none;border:1px solid #334;border-radius:4px;color:#8899aa;padding:3px 10px;cursor:pointer;transition:all .15s}
+.copy-btn:hover{color:#7dd3a8;border-color:#7dd3a8}
+.copy-btn.copied{color:#7dd3a8;border-color:#7dd3a8}
+code{display:block;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--green);padding:11px 14px;overflow-x:auto;white-space:pre;line-height:1.6}
 .related-links{display:flex;flex-wrap:wrap;gap:8px}
-.related-link{font-family:var(--mono);font-size:12px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius);color:var(--text2);padding:6px 12px;cursor:pointer;transition:all .15s}
+.related-link{font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--bg3);border:1px solid var(--border2);border-radius:6px;color:var(--text2);padding:6px 12px;cursor:pointer;transition:all .15s}
 .related-link:hover{border-color:var(--green-dim);color:var(--green)}
-.related-link::before{content:'→ ';color:var(--green)}
-.escalate-box{background:rgba(255,82,82,.07);border:1px solid rgba(255,82,82,.2);border-radius:var(--radius);padding:.9rem 1rem;font-size:13px;color:#ff8a80;line-height:1.6;margin-bottom:1.5rem}
-.escalate-box strong{color:var(--red);display:block;margin-bottom:4px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+.related-link::before{content:'&#8594; ';color:var(--green)}
+.escalate-box{background:rgba(255,82,82,.07);border:1px solid rgba(255,82,82,.2);border-radius:6px;padding:.9rem 1rem;font-size:13px;color:#ff8a80;line-height:1.6;margin-bottom:1.5rem}
+.escalate-box strong{color:var(--red);display:block;margin-bottom:4px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+
+/* ── PRINT STYLES ───────────────────────────────────────── */
+@media print{
+  body *{visibility:hidden}
+  .print-zone,.print-zone *{visibility:visible}
+  .print-zone{position:fixed;top:0;left:0;width:100%;padding:2rem;font-family:'DM Sans',sans-serif;color:#000;background:#fff}
+  .print-zone h1{font-size:18px;margin-bottom:.5rem;font-family:monospace}
+  .print-zone .print-meta{font-size:11px;color:#666;margin-bottom:1.5rem;font-family:monospace}
+  .print-zone .p-symptom{background:#fffbe6;border-left:3px solid #b45309;padding:.6rem .8rem;margin-bottom:1rem;font-size:12px}
+  .print-zone .p-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+  .print-zone .p-box{border:1px solid #ddd;padding:.6rem;font-size:12px}
+  .print-zone .p-box strong{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:#666;margin-bottom:.3rem}
+  .print-zone .p-steps{margin-bottom:1rem}
+  .print-zone .p-step{display:flex;gap:.75rem;margin-bottom:.75rem;font-size:12px;align-items:flex-start}
+  .print-zone .p-num{background:#000;color:#fff;width:18px;height:18px;border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;font-family:monospace}
+  .print-zone pre{background:#f4f4f4;border:1px solid #ddd;padding:.5rem;font-size:10px;font-family:monospace;white-space:pre-wrap;margin-top:.3rem}
+  .print-zone .p-note{font-style:italic;color:#555;font-size:11px;margin-top:.2rem}
+  .print-zone .p-footer{margin-top:2rem;font-size:10px;color:#999;border-top:1px solid #ddd;padding-top:.5rem;font-family:monospace}
+  .modal-overlay,.topbar,.sidebar,.no-results{display:none!important}
+}
+
 ::-webkit-scrollbar{width:6px;height:6px}
 ::-webkit-scrollbar-track{background:var(--bg)}
 ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
@@ -115,6 +182,10 @@ code{display:block;font-family:var(--mono);font-size:12px;color:var(--green);pad
 </style>
 </head>
 <body>
+
+<!-- Print zone (hidden until print) -->
+<div class="print-zone" id="printZone" style="display:none"></div>
+
 <header class="topbar">
   <div class="topbar-brand">
     <span class="prompt">$</span>
@@ -124,32 +195,39 @@ code{display:block;font-family:var(--mono);font-size:12px;color:var(--green);pad
   <div class="topbar-right">
     <div class="search-wrap">
       <svg class="search-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M15 15l-3-3"/></svg>
-      <input type="text" id="searchInput" placeholder="Search: 'account locked', 'no internet', 'Outlook crash'..." autocomplete="off">
+      <input type="text" id="searchInput" placeholder="Search: 'account locked', 'no internet', 'phishing'..." autocomplete="off">
     </div>
+    <button class="icon-btn" id="themeBtn" title="Toggle light/dark mode" onclick="toggleTheme()">&#9790;</button>
+    <button class="icon-btn" data-cat="favorites" onclick="filterCat(this)" title="Show favourites" style="font-size:13px">&#9733;</button>
     <div class="stat-pill"><span id="countSpan">0</span> articles</div>
   </div>
 </header>
+
 <div class="shell">
   <aside class="sidebar">
     <div class="sidebar-section-label">Categories</div>
-    <button class="cat-btn active" data-cat="all" onclick="filterCat(this)"><span class="cat-icon">⊞</span> All Articles <span class="cat-count" id="count-all">0</span></button>
-    <button class="cat-btn" data-cat="accounts" onclick="filterCat(this)"><span class="cat-icon">◉</span> Accounts &amp; AD <span class="cat-count" id="count-accounts">0</span></button>
-    <button class="cat-btn" data-cat="email" onclick="filterCat(this)"><span class="cat-icon">◫</span> Email &amp; Exchange <span class="cat-count" id="count-email">0</span></button>
-    <button class="cat-btn" data-cat="teams" onclick="filterCat(this)"><span class="cat-icon">⬢</span> Teams &amp; OneDrive <span class="cat-count" id="count-teams">0</span></button>
-    <button class="cat-btn" data-cat="windows" onclick="filterCat(this)"><span class="cat-icon">⊟</span> Windows OS <span class="cat-count" id="count-windows">0</span></button>
-    <button class="cat-btn" data-cat="networking" onclick="filterCat(this)"><span class="cat-icon">⬡</span> Networking &amp; VPN <span class="cat-count" id="count-networking">0</span></button>
-    <button class="cat-btn" data-cat="hardware" onclick="filterCat(this)"><span class="cat-icon">◈</span> Hardware <span class="cat-count" id="count-hardware">0</span></button>
-    <button class="cat-btn" data-cat="intune" onclick="filterCat(this)"><span class="cat-icon">⊛</span> Intune / MDM <span class="cat-count" id="count-intune">0</span></button>
-    <button class="cat-btn" data-cat="security" onclick="filterCat(this)"><span class="cat-icon">⊕</span> Security &amp; IR <span class="cat-count" id="count-security">0</span></button>
-    <button class="cat-btn" data-cat="linux" onclick="filterCat(this)"><span class="cat-icon">▣</span> Linux / Server <span class="cat-count" id="count-linux">0</span></button>
-    <button class="cat-btn" data-cat="activedirectory" onclick="filterCat(this)"><span class="cat-icon">◎</span> Active Directory <span class="cat-count" id="count-activedirectory">0</span></button>
-    <button class="cat-btn" data-cat="cloud" onclick="filterCat(this)"><span class="cat-icon">⬣</span> Cloud &amp; Azure <span class="cat-count" id="count-cloud">0</span></button>
+    <button class="cat-btn active" data-cat="all" onclick="filterCat(this)"><span class="cat-icon">&#8862;</span> All Articles <span class="cat-count" id="count-all">0</span></button>
+    <button class="cat-btn" data-cat="accounts" onclick="filterCat(this)"><span class="cat-icon">&#9673;</span> Accounts &amp; AD <span class="cat-count" id="count-accounts">0</span></button>
+    <button class="cat-btn" data-cat="email" onclick="filterCat(this)"><span class="cat-icon">&#10799;</span> Email &amp; Exchange <span class="cat-count" id="count-email">0</span></button>
+    <button class="cat-btn" data-cat="teams" onclick="filterCat(this)"><span class="cat-icon">&#11042;</span> Teams &amp; OneDrive <span class="cat-count" id="count-teams">0</span></button>
+    <button class="cat-btn" data-cat="windows" onclick="filterCat(this)"><span class="cat-icon">&#8863;</span> Windows OS <span class="cat-count" id="count-windows">0</span></button>
+    <button class="cat-btn" data-cat="networking" onclick="filterCat(this)"><span class="cat-icon">&#11041;</span> Networking &amp; VPN <span class="cat-count" id="count-networking">0</span></button>
+    <button class="cat-btn" data-cat="hardware" onclick="filterCat(this)"><span class="cat-icon">&#9672;</span> Hardware <span class="cat-count" id="count-hardware">0</span></button>
+    <button class="cat-btn" data-cat="intune" onclick="filterCat(this)"><span class="cat-icon">&#8859;</span> Intune / MDM <span class="cat-count" id="count-intune">0</span></button>
+    <button class="cat-btn" data-cat="security" onclick="filterCat(this)"><span class="cat-icon">&#8853;</span> Security &amp; IR <span class="cat-count" id="count-security">0</span></button>
+    <button class="cat-btn" data-cat="linux" onclick="filterCat(this)"><span class="cat-icon">&#9635;</span> Linux / Server <span class="cat-count" id="count-linux">0</span></button>
+    <button class="cat-btn" data-cat="activedirectory" onclick="filterCat(this)"><span class="cat-icon">&#9678;</span> Active Directory <span class="cat-count" id="count-activedirectory">0</span></button>
+    <button class="cat-btn" data-cat="cloud" onclick="filterCat(this)"><span class="cat-icon">&#11043;</span> Cloud &amp; Azure <span class="cat-count" id="count-cloud">0</span></button>
     <div class="sidebar-divider"></div>
     <div class="sidebar-section-label">Severity</div>
     <button class="cat-btn" data-sev="high" onclick="filterSev(this)"><span class="sev-dot dot-high"></span> High Priority</button>
     <button class="cat-btn" data-sev="medium" onclick="filterSev(this)"><span class="sev-dot dot-med"></span> Medium Priority</button>
     <button class="cat-btn" data-sev="low" onclick="filterSev(this)"><span class="sev-dot dot-low"></span> Low / Info</button>
+    <div class="sidebar-divider"></div>
+    <div class="sidebar-section-label">Favourites</div>
+    <button class="cat-btn" data-cat="favorites" onclick="filterCat(this)"><span class="cat-icon">&#9733;</span> Starred <span class="cat-count" id="count-favorites">0</span></button>
   </aside>
+
   <main class="main">
     <div class="view-header">
       <div class="view-title"><span class="accent">//</span> <span id="viewLabel">All Articles</span></div>
@@ -163,6 +241,7 @@ code{display:block;font-family:var(--mono);font-size:12px;color:var(--green);pad
     </div>
   </main>
 </div>
+
 <div class="modal-overlay" id="modal" onclick="closeModal(event)">
   <div class="modal" id="modalBox">
     <div class="modal-header">
@@ -171,11 +250,16 @@ code{display:block;font-family:var(--mono);font-size:12px;color:var(--green);pad
         <div class="modal-title" id="modalTitle"></div>
         <div class="modal-meta" id="modalMeta"></div>
       </div>
-      <button class="modal-close" onclick="closeModal(null)">&#10005;</button>
+      <div class="modal-actions">
+        <button class="modal-fav-btn" id="modalFavBtn" onclick="toggleFavFromModal()" title="Star this article">&#9733;</button>
+        <button class="modal-print-btn" onclick="printArticle()" title="Print / Save as PDF">&#128438; Print</button>
+        <button class="modal-close" onclick="closeModal(null)" title="Close">&#10005;</button>
+      </div>
     </div>
     <div class="modal-body" id="modalBody"></div>
   </div>
 </div>
+
 <script>
 const ARTICLES = [
 // ══════════════════════════════════════════════════════════
@@ -2963,28 +3047,72 @@ const ARTICLES = [
   related:[72,73,75]
 },
 ];
-const CAT_LABELS={all:'All Articles',accounts:'Accounts & AD',email:'Email & Exchange',teams:'Teams & OneDrive',windows:'Windows OS',networking:'Networking & VPN',hardware:'Hardware',intune:'Intune / MDM',security:'Security & IR',linux:'Linux / Server',activedirectory:'Active Directory',cloud:'Cloud & Azure'};
-const SEV_CLASS={high:'sev-high',medium:'sev-med',low:'sev-low',info:'sev-info'};
+
+// ── CONSTANTS ────────────────────────────────────────────
+const CAT_LABELS={all:'All Articles',accounts:'Accounts & AD',email:'Email & Exchange',teams:'Teams & OneDrive',windows:'Windows OS',networking:'Networking & VPN',hardware:'Hardware',intune:'Intune / MDM',security:'Security & IR',linux:'Linux / Server',activedirectory:'Active Directory',cloud:'Cloud & Azure',favorites:'Starred Articles'};
+const SEV_CLASS={high:'sev-high',medium:'sev-med',low:'sev-low',info:'sev-low'};
 const SEV_LABEL={high:'HIGH',medium:'MED',low:'LOW',info:'INFO'};
-let currentCat='all',currentSev=null,searchQuery='';
+
+// ── STATE ────────────────────────────────────────────────
+let currentCat='all', currentSev=null, searchQuery='', currentArticleId=null;
+let favorites = JSON.parse(localStorage.getItem('kb_favorites')||'[]');
+
+// ── THEME ────────────────────────────────────────────────
+function toggleTheme(){
+  const html=document.documentElement;
+  const next=html.getAttribute('data-theme')==='dark'?'light':'dark';
+  html.setAttribute('data-theme',next);
+  document.getElementById('themeBtn').innerHTML=next==='dark'?'&#9790;':'&#9788;';
+  localStorage.setItem('kb_theme',next);
+}
+(function(){
+  const saved=localStorage.getItem('kb_theme')||'dark';
+  document.documentElement.setAttribute('data-theme',saved);
+  document.addEventListener('DOMContentLoaded',()=>{
+    document.getElementById('themeBtn').innerHTML=saved==='dark'?'&#9790;':'&#9788;';
+  });
+})();
+
+// ── INIT ─────────────────────────────────────────────────
 function init(){
-  updateCounts();render();
+  updateCounts(); render();
   document.getElementById('searchInput').addEventListener('input',e=>{searchQuery=e.target.value.toLowerCase();render();});
   document.addEventListener('keydown',e=>{
     if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();document.getElementById('searchInput').focus();}
     if(e.key==='Escape')closeModal(null);
   });
 }
+
+// ── FAVOURITES ───────────────────────────────────────────
+function isFav(id){return favorites.includes(id);}
+function saveFavs(){localStorage.setItem('kb_favorites',JSON.stringify(favorites));}
+function toggleFav(id){
+  favorites=isFav(id)?favorites.filter(f=>f!==id):[...favorites,id];
+  saveFavs(); updateCounts(); render();
+  if(currentArticleId===id) updateModalFavBtn(id);
+}
+function toggleFavFromModal(){if(currentArticleId!=null)toggleFav(currentArticleId);}
+function updateModalFavBtn(id){
+  const btn=document.getElementById('modalFavBtn');
+  if(btn){btn.classList.toggle('active',isFav(id));btn.title=isFav(id)?'Remove from starred':'Star this article';}
+}
+
+// ── COUNTS ───────────────────────────────────────────────
 function updateCounts(){
   Object.keys(CAT_LABELS).forEach(c=>{
-    const n=c==='all'?ARTICLES.length:ARTICLES.filter(a=>a.cat===c).length;
+    let n=0;
+    if(c==='all') n=ARTICLES.length;
+    else if(c==='favorites') n=favorites.length;
+    else n=ARTICLES.filter(a=>a.cat===c).length;
     const el=document.getElementById('count-'+c);
     if(el)el.textContent=n;
   });
   document.getElementById('countSpan').textContent=ARTICLES.length;
 }
+
+// ── FILTER ───────────────────────────────────────────────
 function filterCat(btn){
-  document.querySelectorAll('.cat-btn[data-cat]').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.cat-btn[data-cat], .icon-btn[data-cat]').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   currentCat=btn.dataset.cat;
   currentSev=null;
@@ -2996,30 +3124,36 @@ function filterSev(btn){
   if(currentSev===sev){currentSev=null;btn.classList.remove('active');}
   else{
     document.querySelectorAll('.cat-btn[data-sev]').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');currentSev=sev;
+    btn.classList.add('active'); currentSev=sev;
     currentCat='all';
-    document.querySelectorAll('.cat-btn[data-cat]').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.cat-btn[data-cat], .icon-btn[data-cat]').forEach(b=>b.classList.remove('active'));
     document.querySelector('.cat-btn[data-cat="all"]').classList.add('active');
   }
   render();
 }
 function clearAll(e){
   if(e)e.preventDefault();
-  currentCat='all';currentSev=null;searchQuery='';
+  currentCat='all'; currentSev=null; searchQuery='';
   document.getElementById('searchInput').value='';
-  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.cat-btn, .icon-btn[data-cat]').forEach(b=>b.classList.remove('active'));
   document.querySelector('.cat-btn[data-cat="all"]').classList.add('active');
   render();
 }
+
+// ── FILTER LOGIC ─────────────────────────────────────────
 function getFiltered(){
   return ARTICLES.filter(a=>{
-    const matchCat=currentCat==='all'||a.cat===currentCat;
+    const matchCat = currentCat==='all' ? true :
+                     currentCat==='favorites' ? isFav(a.id) :
+                     a.cat===currentCat;
     const matchSev=!currentSev||a.severity===currentSev||(currentSev==='low'&&(a.severity==='low'||a.severity==='info'));
     const fields=[a.title,a.desc,a.cat,CAT_LABELS[a.cat]||'',...(a.tags||[]),(a.keywords||''),(a.symptoms||'')].join(' ').toLowerCase();
     const matchSearch=!searchQuery||searchQuery.split(' ').every(w=>fields.includes(w));
     return matchCat&&matchSev&&matchSearch;
   });
 }
+
+// ── RENDER GRID ──────────────────────────────────────────
 function render(){
   const filtered=getFiltered();
   const grid=document.getElementById('articlesGrid');
@@ -3034,7 +3168,12 @@ function render(){
   noRes.classList.remove('visible');
   grid.innerHTML=filtered.map(a=>`
     <div class="article-card" onclick="openArticle(${a.id})">
-      <div class="card-top"><div class="card-severity ${SEV_CLASS[a.severity]}">${SEV_LABEL[a.severity]}</div></div>
+      <div class="card-top">
+        <div class="card-severity ${SEV_CLASS[a.severity]}">${SEV_LABEL[a.severity]}</div>
+        <div class="card-right">
+          <button class="fav-btn${isFav(a.id)?' active':''}" onclick="event.stopPropagation();toggleFav(${a.id})" title="${isFav(a.id)?'Remove from starred':'Star this article'}">&#9733;</button>
+        </div>
+      </div>
       <div class="card-title">${a.title}</div>
       <div class="card-desc">${a.desc}</div>
       <div class="card-footer">
@@ -3043,11 +3182,15 @@ function render(){
       </div>
     </div>`).join('');
 }
+
+// ── OPEN MODAL ───────────────────────────────────────────
 function openArticle(id){
-  const a=ARTICLES.find(x=>x.id===id);if(!a)return;
+  const a=ARTICLES.find(x=>x.id===id); if(!a)return;
+  currentArticleId=id;
   document.getElementById('modalBreadcrumb').innerHTML=`<span>${CAT_LABELS[a.cat]}</span> / Troubleshooting`;
   document.getElementById('modalTitle').textContent=a.title;
   document.getElementById('modalMeta').innerHTML=`<span class="card-severity ${SEV_CLASS[a.severity]}">${SEV_LABEL[a.severity]} severity</span>`+(a.tags||[]).map(t=>`<span class="tag">${t}</span>`).join('');
+  updateModalFavBtn(id);
   let body='';
   if(a.escalate)body+=`<div class="escalate-box"><strong>&#9888; Escalation Required</strong>${a.escalate}</div>`;
   body+=`<div class="modal-section-label">Symptoms</div><div class="symptom-box">${a.symptoms}</div>
@@ -3059,7 +3202,11 @@ function openArticle(id){
   a.steps.forEach((s,i)=>{
     body+=`<li class="step"><div class="step-num">${i+1}</div><div class="step-content"><div class="step-text">${s.text}</div>`;
     if(s.note)body+=`<div class="step-note">${s.note}</div>`;
-    if(s.code)body+=`<div class="code-block"><div class="code-header"><span class="code-lang">${s.lang||'bash'}</span><button class="copy-btn" onclick="copyCode(this,\`${s.code.replace(/\\/g,'\\\\').replace(/`/g,'\\`')}\`)">Copy</button></div><code>${escHtml(s.code)}</code></div>`;
+    if(s.code){
+      // Base64 encode the code block to safely embed in onclick attribute
+      const encoded=btoa(unescape(encodeURIComponent(s.code)));
+      body+=`<div class="code-block"><div class="code-header"><span class="code-lang">${s.lang||'bash'}</span><button class="copy-btn" onclick="copyEncoded(this,'${encoded}')">Copy</button></div><code>${escHtml(s.code)}</code></div>`;
+    }
     body+='</div></li>';
   });
   body+='</ul>';
@@ -3071,18 +3218,55 @@ function openArticle(id){
   document.getElementById('modal').classList.add('open');
   document.body.style.overflow='hidden';
 }
+
+// ── CLOSE MODAL ──────────────────────────────────────────
 function closeModal(e){
   if(e&&e.target!==document.getElementById('modal'))return;
   document.getElementById('modal').classList.remove('open');
   document.body.style.overflow='';
+  currentArticleId=null;
 }
+
+// ── PRINT ────────────────────────────────────────────────
+function printArticle(){
+  const a=ARTICLES.find(x=>x.id===currentArticleId); if(!a)return;
+  const zone=document.getElementById('printZone');
+  let stepsHtml=a.steps.map((s,i)=>{
+    let h=`<div class="p-step"><div class="p-num">${i+1}</div><div><div>${s.text}</div>`;
+    if(s.note)h+=`<div class="p-note">${s.note}</div>`;
+    if(s.code)h+=`<pre>${s.code.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</pre>`;
+    h+='</div></div>';
+    return h;
+  }).join('');
+  zone.innerHTML=`
+    <h1>${a.title}</h1>
+    <div class="print-meta">Category: ${CAT_LABELS[a.cat]} &nbsp;|&nbsp; Severity: ${a.severity.toUpperCase()} &nbsp;|&nbsp; hi-its-aayush.github.io/Basic-IT-TroubleshootingKB</div>
+    <div class="p-symptom"><strong>Symptoms:</strong> ${a.symptoms}</div>
+    <div class="p-grid">
+      <div class="p-box"><strong>Root Cause</strong>${a.cause}</div>
+      <div class="p-box"><strong>Resolution Approach</strong>${a.fix}</div>
+    </div>
+    <div class="p-steps">${stepsHtml}</div>
+    <div class="p-footer">IT Knowledge Base // Aayush &nbsp;|&nbsp; Printed: ${new Date().toLocaleDateString('en-AU',{day:'2-digit',month:'long',year:'numeric'})}</div>`;
+  zone.style.display='block';
+  window.print();
+  zone.style.display='none';
+}
+
+// ── COPY (BASE64) ─────────────────────────────────────────
+function copyEncoded(btn, encoded){
+  try{
+    const text=decodeURIComponent(escape(atob(encoded)));
+    navigator.clipboard.writeText(text).then(()=>{
+      btn.textContent='Copied!'; btn.classList.add('copied');
+      setTimeout(()=>{btn.textContent='Copy'; btn.classList.remove('copied');},2000);
+    });
+  }catch(e){console.error('Copy failed',e);}
+}
+
+// ── UTILS ────────────────────────────────────────────────
 function escHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-function copyCode(btn,text){
-  navigator.clipboard.writeText(text).then(()=>{
-    btn.textContent='Copied!';btn.classList.add('copied');
-    setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied');},2000);
-  });
-}
+
 init();
 </script>
 </body>
