@@ -1,3 +1,5 @@
+Here is an updated version of your README based on the code in your `index.html`. It accurately reflects the expanded content (150+ articles) and the refined categorization system you've implemented.
+
 # 🖥️ Basic IT Troubleshooting Knowledge Base
 
 A searchable, single-file IT troubleshooting wiki built with vanilla HTML, CSS, and JavaScript — no frameworks, no backend, no dependencies. Designed for L1/L2 IT Support environments.
@@ -8,75 +10,63 @@ A searchable, single-file IT troubleshooting wiki built with vanilla HTML, CSS, 
 
 ## What It Does
 
-A fast, offline-capable reference tool for IT support scenarios. Each article includes:
+A high-performance, offline-capable reference tool for IT support scenarios. Each article provides a structured breakdown:
 
 - **Symptoms** — what the user reports and what you observe
-- **Root cause** — why it's happening
-- **Step-by-step fix** — numbered steps with copy-to-clipboard commands
-- **Escalation notes** — when to escalate and to whom
-- **Related articles** — quick links to connected issues
+- **Root Cause** — why the issue is occurring
+- **Resolution Approach** — the high-level fix strategy
+- **Step-by-Step Fix** — numbered steps with integrated copy-to-clipboard code blocks for PowerShell, CMD, Bash, and Registry
+- **Escalation Notes** — critical warnings and when to involve specialized teams
+- **Related Articles** — quick links to interconnected troubleshooting paths
 
 ---
 
 ## Coverage
 
-35+ articles across 10 categories:
+**150+ comprehensive articles** across 12 categories:
 
-| Category | Example Articles |
+| Category | Coverage Areas |
 |---|---|
-| **Networking** | No internet, Wi-Fi connected but no access, mapped drives, VPN |
-| **Accounts & Access** | Account lockout, password reset, MFA issues, domain trust failure |
-| **Email & Microsoft 365** | Outlook crashing, emails not arriving, Teams login loop, shared mailbox |
-| **Windows OS** | Slow PC, BSOD, won't boot, temporary profile, Windows Update stuck |
-| **Printing** | Printer offline, print spooler crashing |
-| **Hardware** | PC won't power on, no display, USB not recognised, no audio |
-| **Security** | Phishing response, ransomware IR, mass account lockout storm |
-| **Linux / Server** | SSH refused, disk full, systemd service failures |
-| **Active Directory** | GPO not applying, replication failures |
-| **Cloud & Azure** | Azure AD sync errors, NSG-blocked VMs |
+| **Networking & VPN** | Connectivity, DNS, MTU adjustment, captive portals, firewall exceptions |
+| **Accounts & AD** | Lockouts, trust relationships, LAPS, MFA resets, and provisioning |
+| **Email & Exchange** | Outlook performance, OST repair, mailbox conversion, delivery traces |
+| **Windows OS** | Performance, BSOD, boot recovery, registry fixes, system file repairs |
+| **Teams & OneDrive** | Cache clearing, sync conflicts, presence issues, SharePoint recovery |
+| **Hardware** | POST failure, display issues, docking stations, peripherals, BIOS updates |
+| **Security & IR** | Phishing triage, compromised accounts, malware isolation, VirusTotal checks |
+| **Intune / MDM** | Policy sync, compliance, app deployment, Autopilot, remote wipes |
+| **Linux / Server** | SSH troubleshooting, disk space management, systemd |
+| **Cloud & Azure** | Entra ID (Azure AD) sync errors, attribute conflicts, license management |
 
 ---
 
 ## Features
 
-- **Live search** — searches titles, descriptions, tags, symptoms, and keywords (`Ctrl+K`)
-- **Category sidebar** — filter by topic area
-- **Severity filter** — HIGH / MEDIUM / LOW priority
-- **Active filter badges** — see and clear active filters at a glance
-- **Copy commands** — one-click copy for every PowerShell, CMD, and Bash command
-- **Zero dependencies** — single HTML file, works offline after first load
+- **Blazing Fast Search** — Instant filtering across titles, descriptions, tags, and symptoms (`Ctrl+K`)
+- **Categorical Navigation** — Sidebar filtering by functional area or severity level
+- **Severity Awareness** — Visual indicators for HIGH, MEDIUM, and LOW priority issues
+- **Dynamic Filter Badges** — Manage complex search/filter combinations at a glance
+- **Command Integration** — One-click copy functionality for every terminal command
+- **Zero Dependencies** — Single HTML file architecture; works offline once loaded
 
 ---
 
+## Technical Reference
 
-**Available category keys:**
+### Available Category Keys
+To extend the knowledge base, use these category keys in the `ARTICLES` array:
 
-| Key | Sidebar Label |
-|---|---|
-| `networking` | Networking |
-| `accounts` | Accounts & Access |
-| `email` | Email & Microsoft 365 |
-| `windows` | Windows OS |
-| `printing` | Printing |
-| `hardware` | Hardware |
-| `security` | Security |
-| `linux` | Linux / Server |
-| `cloud` | Cloud & Azure |
-| `activedirectory` | Active Directory |
+- `networking`, `accounts`, `email`, `teams`, `windows`, `hardware`, `intune`, `security`, `linux`, `activedirectory`, `cloud`
+
+### Tech Stack
+- **HTML5 / CSS3 / Vanilla JS** — No build step or frameworks required
+- **Typography** — JetBrains Mono (Code) and DM Sans (UI) via Google Fonts
+- **Deployment** — Optimized for GitHub Pages
 
 ---
-
-## Tech Stack
-
-- **HTML5 / CSS3 / Vanilla JS** — no build step, no framework
-- **JetBrains Mono** + **DM Sans** via Google Fonts
-- **GitHub Pages** for hosting
-
----
-
 
 ## Author
 
-**Aayush** — IT Support professional based in Sydney, Australia.
+**Aayush Acharya** — IT Support professional based in Sydney, Australia.
 
 [GitHub Profile](https://github.com/hi-its-aayush)
