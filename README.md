@@ -1,5 +1,3 @@
-Here is an updated version of your README based on the code in your `index.html`. It accurately reflects the expanded content (150+ articles) and the refined categorization system you've implemented.
-
 # 🖥️ Basic IT Troubleshooting Knowledge Base
 
 A searchable, single-file IT troubleshooting wiki built with vanilla HTML, CSS, and JavaScript — no frameworks, no backend, no dependencies. Designed for L1/L2 IT Support environments.
